@@ -3,6 +3,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:session_3/app_colors.dart';
 import 'package:session_3/core/environment/env.dart';
+import 'package:session_3/core/navigation/router.dart';
 import 'package:session_3/features/login/presentation/state/login_provider.dart';
 import 'package:session_3/features/login/presentation/views/login_view.dart';
 import 'package:session_3/l10n/app_localizations.dart';
@@ -18,7 +19,7 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       theme: ThemeData(primaryColor: AppColors.primaryColor),
       title: Env.appName,
       supportedLocales: [const Locale('en', 'US'), const Locale('es', 'ES')],
@@ -28,10 +29,7 @@ class MainApp extends StatelessWidget {
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
-      home: ChangeNotifierProvider<LoginProvider>(
-        create: (_) => LoginProvider(),
-        child: const LoginView(),
-      ),
+      routerConfig: router,
     );
   }
 }

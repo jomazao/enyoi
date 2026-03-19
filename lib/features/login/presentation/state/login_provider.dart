@@ -8,23 +8,29 @@ class LoginProvider extends ChangeNotifier {
 
   String title = 'Login';
 
+  bool logged = false;
+
   void updateTitle(String newTitle) {
     title = newTitle;
     notifyListeners();
   }
 
-  Future<void> login(String email, String password) async {
+  Future<bool> login(String email, String password) async {
     title = 'Haciendo login...';
     notifyListeners();
 
     try {
       final user = await _loginUseCase.call(email, password);
       title = 'Bienvenido ${user.name}';
+      logged = true;
+
       notifyListeners();
+      return true;
     } catch (e) {
       title = 'Error al hacer login';
+      logged = false;
       notifyListeners();
-      return;
+      return false;
     }
   }
 

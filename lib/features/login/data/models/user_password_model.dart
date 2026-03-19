@@ -4,6 +4,13 @@ class UserPasswordModel {
 
   UserPasswordModel({required this.email, required this.password});
 
+
+  factory UserPasswordModel.fromEntity(Map<String, dynamic> json) {
+    return UserPasswordModel(
+      email: json['email'],
+      password: json['password'],
+    );
+  }
   /// Todo: implement toJSON
   ///
   ///

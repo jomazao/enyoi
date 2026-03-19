@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:session_3/core/assets.dart';
 import 'package:session_3/features/login/presentation/state/login_provider.dart';
@@ -122,16 +123,23 @@ class _BodyWidgetState extends State<BodyWidget> {
                 style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all(Color(0xFF006FFD)),
                 ),
-                onPressed: () {
+                onPressed: () async {
                   /* Provider.of<LoginProvider>(
-          context,
-          listen: false,
-        ).updateTitle('Haciendo login...');*/
+                    context,
+                    listen: false,
+                  ).updateTitle('Haciendo login...');*/
 
                   final email = emailController.text;
                   final password = passwordController.text;
 
-                  context.read<LoginProvider>().login(email, password);
+                  final logged = await context.read<LoginProvider>().login(
+                    email,
+                    password,
+                  );
+
+                  if (logged) {
+                    //  context.go('/dashboard');
+                  }
 
                   // Solo leer valores para ejecutar funciones
                 },
@@ -257,9 +265,17 @@ class HeaderWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     //final title = Provider.of<LoginProvider>(context).title;
-    final title = context
-        .watch<LoginProvider>()
-        .title; // Leer valores y actualizar UI
+    final state = context
+        .watch<LoginProvider>(); // Leer valores y actualizar UI
+
+    final title = state.title;
+    final logged = state.logged;
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (logged) {
+        // Navegar a otra pantalla
+        context.go('/dashboard');
+      }
+    });
 
     return Text(
       title,
