@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 import 'package:session_3/core/navigation/router.dart';
+import 'package:session_3/features/dashboard/presentation/state/dashboard_provider.dart';
 
 class BaseView extends StatelessWidget {
   final String name;
@@ -37,6 +39,13 @@ class DashboardView extends StatelessWidget {
                 context.goNamed(Routes.profile);
               },
               child: Text('Perfil'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                context.read<DashboardProvider>().logout();
+                context.goNamed(Routes.login);
+              },
+              child: Text('Cerrar sesión'),
             ),
           ],
         ),

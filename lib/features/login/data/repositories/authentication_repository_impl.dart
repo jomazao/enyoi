@@ -1,3 +1,4 @@
+import 'package:session_3/features/login/data/data_sources/local_authentication_data_source.dart';
 import 'package:session_3/features/login/data/data_sources/remote_authetication_data_source.dart';
 import 'package:session_3/features/login/data/models/user_password_model.dart';
 import 'package:session_3/features/login/domain/entities.dart/user.dart';
@@ -5,11 +6,15 @@ import 'package:session_3/features/login/domain/repositories/authentication_repo
 
 class AuthenticationRepositoryImpl extends AuthenticationRepository {
   final RemoteAutheticationDataSource _remoteAutheticationDataSource;
+  final LocalAuthenticationDataSource _localAuthenticationDataSource;
 
   AuthenticationRepositoryImpl({
     RemoteAutheticationDataSource? remoteAutheticationDataSource,
+    LocalAuthenticationDataSource? localAuthenticationDataSource,
   }) : _remoteAutheticationDataSource =
-           remoteAutheticationDataSource ?? RemoteAutheticationDataSource();
+           remoteAutheticationDataSource ?? RemoteAutheticationDataSource(),
+       _localAuthenticationDataSource =
+           localAuthenticationDataSource ?? LocalAuthenticationDataSource();
 
   @override
   Future<String> getAccessToken() {
@@ -24,15 +29,16 @@ class AuthenticationRepositoryImpl extends AuthenticationRepository {
   }
 
   @override
-  Future<bool> isSignedIn() {
-    // TODO: implement isSignedIn
-    throw UnimplementedError();
+  Future<bool> isSignedIn() async {
+    final sessionToken = await _localAuthenticationDataSource.getSessionToken();
+    return sessionToken != null;
   }
 
   @override
-  Future<bool> logOut() {
-    // TODO: implement logOut
-    throw UnimplementedError();
+  Future<bool> logOut() async {
+    await _localAuthenticationDataSource.clearSession();
+
+    return true;
   }
 
   @override
@@ -67,5 +73,10 @@ class AuthenticationRepositoryImpl extends AuthenticationRepository {
   Future<void> signOut() {
     // TODO: implement signOut
     throw UnimplementedError();
+  }
+
+  @override
+  Future<void> saveSession(String token) async {
+    await _localAuthenticationDataSource.saveSession(token);
   }
 }

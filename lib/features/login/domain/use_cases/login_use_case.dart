@@ -18,7 +18,12 @@ class LoginUseCase {
       password,
     );
 
-    user.newId = '12345'; // Ejemplo de uso del setter para modificar el ID del usuario
+    await _authenticationRepository.saveSession(
+      'fake_token',
+    ); // Simulamos guardar una sesión
+
+    user.newId =
+        '12345'; // Ejemplo de uso del setter para modificar el ID del usuario
 
     return user;
   }

@@ -9,4 +9,5 @@ abstract class AuthenticationRepository {
   Future<bool> registerWithEmailAndPassword(String email, String password);
   Future<String> getAccessToken();
   Future<User> signIUpWithEmailAndPassword(String email, String password);
+  Future<void> saveSession(String token);
 }
