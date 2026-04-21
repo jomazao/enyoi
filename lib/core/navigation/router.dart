@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:session_3/features/accounts/presentation/states/credit_request_provider.dart';
 import 'package:session_3/features/accounts/presentation/views/credit_request_view.dart';
 import 'package:session_3/features/dashboard/presentation/state/dashboard_provider.dart';
 import 'package:session_3/features/dashboard/presentation/views/dashboard_view.dart';
+import 'package:session_3/features/login/presentation/state/login_cubit.dart';
 import 'package:session_3/features/login/presentation/state/login_provider.dart';
+import 'package:session_3/features/login/presentation/views/login_cubit_view.dart';
 import 'package:session_3/features/login/presentation/views/login_view.dart';
 import 'package:session_3/features/profile/views/dashboard_view.dart';
 
@@ -13,10 +16,18 @@ final router = GoRouter(
   routes: [
     GoRoute(
       name: Routes.login,
-      path: '/',
+      path: '/old',
       builder: (context, state) => ChangeNotifierProvider<LoginProvider>(
         create: (_) => LoginProvider()..checkIfLogged(),
         child: const LoginView(),
+      ),
+    ),
+    GoRoute(
+      name: Routes.loginCubit,
+      path: '/',
+      builder: (context, state) => BlocProvider<LoginCubit>(
+        create: (_) => LoginCubit()..checkIfLogged(),
+        child: const LoginCubitView(),
       ),
     ),
 
@@ -67,6 +78,7 @@ final router = GoRouter(
 
 abstract class Routes {
   static const String login = 'login';
+  static const String loginCubit = 'login_cubit';
   static const String dashboard = 'dashboard';
   static const String creditRequest = 'solicitud-credito';
   static const String profile = 'profile';

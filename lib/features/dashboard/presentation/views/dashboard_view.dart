@@ -23,32 +23,15 @@ class DashboardView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final buttonsText = ['Crédito', 'Perfil', 'Cerrar sesión'];
+
+    final buttons = buttonsText
+        .map((text) => SizedBox(child: Container(child: Text(text))))
+        .toList();
+
     return Scaffold(
       body: Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            ElevatedButton(
-              onPressed: () {
-                context.goNamed(Routes.creditRequest);
-              },
-              child: Text('Crédito'),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                context.goNamed(Routes.profile);
-              },
-              child: Text('Perfil'),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                context.read<DashboardProvider>().logout();
-                context.goNamed(Routes.login);
-              },
-              child: Text('Cerrar sesión'),
-            ),
-          ],
-        ),
+        child: Column(mainAxisSize: MainAxisSize.min, children: buttons),
       ),
     );
   }
