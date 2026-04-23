@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:session_3/app_colors.dart';
 import 'package:session_3/core/dependencies.dart';
 import 'package:session_3/core/environment/env.dart';
@@ -14,8 +15,8 @@ void runProject() async {
   await Env.initialize();
   await LocalStorage().init();
   await setupDependencies();
-  Bloc.observer = MyBlocObserver();
-  runApp(const MainApp());
+  Bloc.observer = MyBlocObserver(); 
+  runApp(ProviderScope(child: const MainApp()));
 }
 
 class MainApp extends StatelessWidget {

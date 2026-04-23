@@ -6,9 +6,13 @@ import 'package:session_3/features/accounts/presentation/states/credit_request_p
 import 'package:session_3/features/accounts/presentation/views/credit_request_view.dart';
 import 'package:session_3/features/dashboard/presentation/state/dashboard_provider.dart';
 import 'package:session_3/features/dashboard/presentation/views/dashboard_view.dart';
+import 'package:session_3/features/login/presentation/state/login_bloc.dart';
 import 'package:session_3/features/login/presentation/state/login_cubit.dart';
+import 'package:session_3/features/login/presentation/state/login_event.dart';
 import 'package:session_3/features/login/presentation/state/login_provider.dart';
+import 'package:session_3/features/login/presentation/views/login_bloc_view.dart';
 import 'package:session_3/features/login/presentation/views/login_cubit_view.dart';
+import 'package:session_3/features/login/presentation/views/login_riverpod_view.dart';
 import 'package:session_3/features/login/presentation/views/login_view.dart';
 import 'package:session_3/features/profile/views/dashboard_view.dart';
 
@@ -24,11 +28,24 @@ final router = GoRouter(
     ),
     GoRoute(
       name: Routes.loginCubit,
-      path: '/',
+      path: '/cubit',
       builder: (context, state) => BlocProvider<LoginCubit>(
         create: (_) => LoginCubit()..checkIfLogged(),
         child: const LoginCubitView(),
       ),
+    ),
+    GoRoute(
+      name: Routes.loginBloc,
+      path: '/bloc',
+      builder: (context, state) => BlocProvider<LoginBloc>(
+        create: (_) => LoginBloc()..add(CheckIfLoggedEvent()),
+        child: const LoginBlocView(),
+      ),
+    ),
+    GoRoute(
+      name: Routes.loginRiverpod,
+      path: '/',
+      builder: (context, state) => const LoginRiverpodView(),
     ),
 
     ShellRoute(
@@ -79,6 +96,8 @@ final router = GoRouter(
 abstract class Routes {
   static const String login = 'login';
   static const String loginCubit = 'login_cubit';
+  static const String loginBloc = 'login_bloc';
+  static const String loginRiverpod = 'login_riverpod';
   static const String dashboard = 'dashboard';
   static const String creditRequest = 'solicitud-credito';
   static const String profile = 'profile';

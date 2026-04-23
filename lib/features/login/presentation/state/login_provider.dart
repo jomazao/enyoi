@@ -2,18 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:session_3/features/login/domain/use_cases/is_loggeed_use_case.dart';
 import 'package:session_3/features/login/domain/use_cases/login_use_case.dart';
 
-
-
 class LoginViewModel {
   final String title;
   final bool logged;
 
-  LoginViewModel({
-    required this.title,
-    required this.logged,
-  });
+  LoginViewModel({required this.title, required this.logged});
 }
-
 
 class LoginProvider extends ChangeNotifier {
   final LoginUseCase _loginUseCase;
