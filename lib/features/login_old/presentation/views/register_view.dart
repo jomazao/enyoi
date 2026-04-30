@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:session_3/features/login/presentation/state/register_notifier.dart';
+import 'package:session_3/features/login_old/presentation/state/register_notifier.dart';
 
 class RegisterView extends ConsumerWidget {
   const RegisterView({super.key});

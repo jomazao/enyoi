@@ -25,8 +25,8 @@ class User {
   factory User.fromModel(UserModel userModel) {
     return User(
       email: userModel.email,
-      id: userModel.id,
-      name: userModel.name,
+      id: '${userModel.id}',
+      name: userModel.firstName,
       surname: '',
     );
   }

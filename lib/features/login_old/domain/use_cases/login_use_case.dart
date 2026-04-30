@@ -1,6 +1,6 @@
-import 'package:session_3/features/login/data/repositories/authentication_repository_impl.dart';
-import 'package:session_3/features/login/domain/entities.dart/user.dart';
-import 'package:session_3/features/login/domain/repositories/authentication_repository.dart';
+import 'package:session_3/features/login_old/data/repositories/authentication_repository_impl.dart';
+import 'package:session_3/features/login_old/domain/entities.dart/user.dart';
+import 'package:session_3/features/login_old/domain/repositories/authentication_repository.dart';
 
 class LoginUseCase {
   final AuthenticationRepository _authenticationRepository;
@@ -13,6 +13,8 @@ class LoginUseCase {
     // Aquí iría la lógica de autenticación, por ejemplo, llamando a un repositorio
     // que se encargue de hacer la petición a un servidor.
     // Por simplicidad, vamos a simular una autenticación exitosa si el email y la contraseña no están vacíos.
+
+    print('Attempting to log in with email: $email and password: $password');
     final user = await _authenticationRepository.signIUpWithEmailAndPassword(
       email,
       password,

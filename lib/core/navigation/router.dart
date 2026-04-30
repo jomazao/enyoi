@@ -6,14 +6,15 @@ import 'package:session_3/features/accounts/presentation/states/credit_request_p
 import 'package:session_3/features/accounts/presentation/views/credit_request_view.dart';
 import 'package:session_3/features/dashboard/presentation/state/dashboard_provider.dart';
 import 'package:session_3/features/dashboard/presentation/views/dashboard_view.dart';
-import 'package:session_3/features/login/presentation/state/login_bloc.dart';
-import 'package:session_3/features/login/presentation/state/login_cubit.dart';
-import 'package:session_3/features/login/presentation/state/login_event.dart';
-import 'package:session_3/features/login/presentation/views/login_bloc_view.dart';
-import 'package:session_3/features/login/presentation/views/login_cubit_view.dart';
-import 'package:session_3/features/login/presentation/views/login_riverpod_view.dart';
-import 'package:session_3/features/login/presentation/views/login_view.dart';
-import 'package:session_3/features/login/presentation/views/register_view.dart';
+import 'package:session_3/features/login_old/presentation/state/login_bloc.dart';
+import 'package:session_3/features/login_old/presentation/state/login_cubit.dart';
+import 'package:session_3/features/login_old/presentation/state/login_event.dart';
+import 'package:session_3/features/login_old/presentation/state/login_provider.dart';
+import 'package:session_3/features/login_old/presentation/views/login_bloc_view.dart';
+import 'package:session_3/features/login_old/presentation/views/login_cubit_view.dart';
+import 'package:session_3/features/login_old/presentation/views/login_riverpod_view.dart';
+import 'package:session_3/features/login_old/presentation/views/login_view.dart';
+import 'package:session_3/features/login_old/presentation/views/register_view.dart';
 import 'package:session_3/features/profile/views/dashboard_view.dart';
 
 final router = GoRouter(
@@ -40,6 +41,14 @@ final router = GoRouter(
       ),
     ),
     GoRoute(
+      redirect: (context, state) {
+        final loginProvider = context.watch<LoginProvider>();
+        if (loginProvider.logged) {
+          return '/dashboard'; // Redirige al dashboard si el usuario está logueado
+        } else {
+          return null; // No redirection, stay on the current route
+        }
+      },
       name: Routes.loginRiverpod,
       path: '/',
       builder: (context, state) => const LoginRiverpodView(),

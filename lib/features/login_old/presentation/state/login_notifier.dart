@@ -1,7 +1,7 @@
 import 'package:riverpod/legacy.dart';
-import 'package:session_3/features/login/domain/use_cases/is_loggeed_use_case.dart';
-import 'package:session_3/features/login/domain/use_cases/login_use_case.dart';
-import 'package:session_3/features/login/presentation/state/login_state.dart';
+import 'package:session_3/features/login_old/domain/use_cases/is_loggeed_use_case.dart';
+import 'package:session_3/features/login_old/domain/use_cases/login_use_case.dart';
+import 'package:session_3/features/login_old/presentation/state/login_state.dart';
 
 final loginRiverpodProvider = StateNotifierProvider<LoginNotifier, LoginState>(
   (ref) => LoginNotifier(),
@@ -39,7 +39,9 @@ class LoginNotifier extends StateNotifier<LoginState> {
 
       return true;
     } catch (e) {
-      state = LoginErrorState('Error al hacer login');
+      print(e);
+
+      state = LoginErrorState('Dummy Error al hacer login');
       return false;
     }
   }

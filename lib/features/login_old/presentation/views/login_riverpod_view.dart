@@ -4,9 +4,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:session_3/core/assets.dart';
 import 'package:session_3/core/navigation/router.dart';
-import 'package:session_3/features/login/presentation/state/login_notifier.dart';
-import 'package:session_3/features/login/presentation/widgets/password_textfield.dart';
-import 'package:session_3/features/login/presentation/widgets/social_widget.dart';
+import 'package:session_3/features/login_old/presentation/state/login_notifier.dart';
+import 'package:session_3/features/login_old/presentation/widgets/password_textfield.dart';
+import 'package:session_3/features/login_old/presentation/widgets/social_widget.dart';
 import 'package:session_3/l10n/app_localizations.dart';
 
 class LoginRiverpodView extends StatelessWidget {

@@ -1,4 +1,4 @@
-import 'package:session_3/features/login/domain/entities.dart/user.dart';
+import 'package:session_3/features/login_old/domain/entities.dart/user.dart';
 
 abstract class AuthenticationRepository {
   Future<void> signInWithGoogle();

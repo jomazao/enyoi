@@ -1,5 +1,5 @@
 import 'package:riverpod/legacy.dart';
-import 'package:session_3/features/login/presentation/state/register_state_freezed.dart';
+import 'package:session_3/features/login_old/presentation/state/register_state_freezed.dart';
 
 final registerNotifierProvider =
     StateNotifierProvider<RegisterNotifier, RegisterState>(

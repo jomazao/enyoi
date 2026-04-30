@@ -3,12 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:session_3/core/assets.dart';
-import 'package:session_3/features/login/presentation/state/login_cubit.dart';
-import 'package:session_3/features/login/presentation/widgets/social_widget.dart';
+import 'package:session_3/features/login_old/presentation/state/login_bloc.dart';
+import 'package:session_3/features/login_old/presentation/state/login_event.dart';
+import 'package:session_3/features/login_old/presentation/widgets/social_widget.dart';
 import 'package:session_3/l10n/app_localizations.dart';
 
-class LoginCubitView extends StatelessWidget {
-  const LoginCubitView({super.key});
+class LoginBlocView extends StatelessWidget {
+  const LoginBlocView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -132,14 +133,13 @@ class _BodyWidgetState extends State<BodyWidget> {
                   final email = emailController.text;
                   final password = passwordController.text;
 
-                  final logged = await context.read<LoginCubit>().login(
-                    email,
-                    password,
+                  context.read<LoginBloc>().add(
+                    LoginWithEmailEvent(email, password),
                   );
 
-                  if (logged) {
+                  /* if (logged) {
                     //  context.go('/dashboard');
-                  }
+                  }*/
 
                   // Solo leer valores para ejecutar funciones
                 },
@@ -265,10 +265,10 @@ class HeaderWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     //final title = Provider.of<LoginProvider>(context).title;
-    final cubit = context.watch<LoginCubit>(); // Leer valores y actualizar UI
+    final bloc = context.watch<LoginBloc>(); // Leer valores y actualizar UI
 
-    final title = cubit.state.title;
-    final logged = cubit.state.logged;
+    final title = bloc.state.title;
+    final logged = bloc.state.logged;
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (logged) {
         // Navegar a otra pantalla

@@ -29,5 +29,5 @@ final class LoginErrorState extends LoginState {
   final String errorMessage;
 
   LoginErrorState(this.errorMessage)
-    : super(title: 'Error al hacer login', logged: false);
+    : super(title: errorMessage, logged: false);
 }

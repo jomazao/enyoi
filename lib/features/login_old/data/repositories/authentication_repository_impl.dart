@@ -1,8 +1,8 @@
-import 'package:session_3/features/login/data/data_sources/local_authentication_data_source.dart';
-import 'package:session_3/features/login/data/data_sources/remote_authetication_data_source.dart';
 import 'package:session_3/features/login/data/models/user_password_model.dart';
-import 'package:session_3/features/login/domain/entities.dart/user.dart';
-import 'package:session_3/features/login/domain/repositories/authentication_repository.dart';
+import 'package:session_3/features/login_old/data/data_sources/local_authentication_data_source.dart';
+import 'package:session_3/features/login_old/data/data_sources/remote_authetication_data_source.dart';
+import 'package:session_3/features/login_old/domain/entities.dart/user.dart';
+import 'package:session_3/features/login_old/domain/repositories/authentication_repository.dart';
 
 class AuthenticationRepositoryImpl extends AuthenticationRepository {
   final RemoteAutheticationDataSource _remoteAutheticationDataSource;
@@ -52,6 +52,7 @@ class AuthenticationRepositoryImpl extends AuthenticationRepository {
     String email,
     String password,
   ) async {
+    print('Repository Signing up with email: $email and password: $password');
     final UserPasswordModel userPasswordModel = UserPasswordModel(
       email: email,
       password: password,
