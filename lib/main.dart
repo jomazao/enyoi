@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -10,6 +11,7 @@ import 'package:session_3/core/local_storage.dart';
 import 'package:session_3/core/navigation/router.dart';
 import 'package:session_3/core/utils/my_bloc_observer.dart';
 import 'package:session_3/features/login_old/presentation/state/login_provider.dart';
+import 'package:session_3/firebase_options.dart';
 import 'package:session_3/l10n/app_localizations.dart';
 
 void runProject() async {
@@ -17,6 +19,7 @@ void runProject() async {
   await Env.initialize();
   await LocalStorage().init();
   await setupDependencies();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   Bloc.observer = MyBlocObserver();
   runApp(ProviderScope(child: const MainApp()));
 }
@@ -29,7 +32,10 @@ class MainApp extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (_) => LoginProvider()..checkIfLogged(),
       child: MaterialApp.router(
-        theme: ThemeData(primaryColor: AppColors.primaryColor),
+        theme: ThemeData(
+          primaryColor: AppColors.primaryColor,
+          fontFamily: 'Inter',
+        ),
         title: Env.appName,
         supportedLocales: [const Locale('en', 'US'), const Locale('es', 'ES')],
         localizationsDelegates: [

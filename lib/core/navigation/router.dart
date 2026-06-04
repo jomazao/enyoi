@@ -15,7 +15,7 @@ import 'package:session_3/features/login_old/presentation/views/login_cubit_view
 import 'package:session_3/features/login_old/presentation/views/login_riverpod_view.dart';
 import 'package:session_3/features/login_old/presentation/views/login_view.dart';
 import 'package:session_3/features/login_old/presentation/views/register_view.dart';
-import 'package:session_3/features/profile/views/dashboard_view.dart';
+import 'package:session_3/features/profile/presentation/views/profile_view.dart';
 
 final router = GoRouter(
   routes: [
@@ -62,19 +62,7 @@ final router = GoRouter(
     ),
 
     ShellRoute(
-      builder: (context, state, child) => Scaffold(
-        appBar: AppBar(
-          title: Text('Enyoi Bank'),
-          backgroundColor: Colors.green,
-        ),
-        body: Column(
-          children: [
-            Expanded(flex: 70, child: child),
-            Expanded(flex: 10, child: Container(color: Colors.orange)),
-            Expanded(flex: 10, child: Container(color: Colors.red)),
-          ],
-        ),
-      ),
+      builder: (context, state, child) => Scaffold(body: child),
       routes: [
         GoRoute(
           name: Routes.dashboard,

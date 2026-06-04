@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:session_3/core/navigation/router.dart';
 
 class BaseView extends StatelessWidget {
   final String name;
@@ -22,7 +24,24 @@ class DashboardView extends StatelessWidget {
     final buttonsText = ['Crédito', 'Perfil', 'Cerrar sesión'];
 
     final buttons = buttonsText
-        .map((text) => SizedBox(child: Container(child: Text(text))))
+        .map(
+          (text) => InkWell(
+            onTap: () {
+              switch (text) {
+                case 'Crédito':
+                  Navigator.pushNamed(context, '/credit');
+                  break;
+                case 'Perfil':
+                  context.goNamed(Routes.profile);
+                  break;
+                case 'Cerrar sesión':
+                  // Implementar lógica de cierre de sesión
+                  break;
+              }
+            },
+            child: SizedBox(child: Text(text)),
+          ),
+        )
         .toList();
 
     return Scaffold(
