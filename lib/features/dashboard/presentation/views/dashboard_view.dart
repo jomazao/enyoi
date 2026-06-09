@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:session_3/core/navigation/router.dart';
+import 'package:session_3/features/login_old/domain/use_cases/log_out_use_case.dart';
 
 class BaseView extends StatelessWidget {
   final String name;
@@ -35,6 +36,9 @@ class DashboardView extends StatelessWidget {
                   context.goNamed(Routes.profile);
                   break;
                 case 'Cerrar sesión':
+             
+                LogOutUseCase().call();
+                   context.goNamed(Routes.login);
                   // Implementar lógica de cierre de sesión
                   break;
               }

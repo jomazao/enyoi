@@ -1,4 +1,4 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+/*import 'package:cloud_firestore/cloud_firestore.dart';
 
 class EcomerceRemoteDatasource {
   final FirebaseFirestore _firestore;
@@ -12,4 +12,4 @@ class EcomerceRemoteDatasource {
         .map((doc) => ProductModel.fromJson(doc.data()))
         .toList();
   }
-}
+}*/

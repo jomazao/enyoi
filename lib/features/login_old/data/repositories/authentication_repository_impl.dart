@@ -1,18 +1,19 @@
-import 'package:session_3/features/login/data/models/user_password_model.dart';
+import 'package:session_3/features/login_old/data/data_sources/firebase_remote_authentication_data_source.dart';
 import 'package:session_3/features/login_old/data/data_sources/local_authentication_data_source.dart';
-import 'package:session_3/features/login_old/data/data_sources/remote_authetication_data_source.dart';
+import 'package:session_3/features/login_old/data/data_sources/remote_authentication_data_source.dart';
+import 'package:session_3/features/login_old/data/models/user_password_model.dart';
 import 'package:session_3/features/login_old/domain/entities.dart/user.dart';
 import 'package:session_3/features/login_old/domain/repositories/authentication_repository.dart';
 
 class AuthenticationRepositoryImpl extends AuthenticationRepository {
-  final RemoteAutheticationDataSource _remoteAutheticationDataSource;
+  final RemoteAuthenticationDataSource _remoteAutheticationDataSource;
   final LocalAuthenticationDataSource _localAuthenticationDataSource;
 
   AuthenticationRepositoryImpl({
-    RemoteAutheticationDataSource? remoteAutheticationDataSource,
+    RemoteAuthenticationDataSource? remoteAutheticationDataSource,
     LocalAuthenticationDataSource? localAuthenticationDataSource,
   }) : _remoteAutheticationDataSource =
-           remoteAutheticationDataSource ?? RemoteAutheticationDataSource(),
+           remoteAutheticationDataSource ?? FirebaseRemoteAuthenticationDataSource(),
        _localAuthenticationDataSource =
            localAuthenticationDataSource ?? LocalAuthenticationDataSource();
 
@@ -59,7 +60,7 @@ class AuthenticationRepositoryImpl extends AuthenticationRepository {
     );
 
     final userModel = await _remoteAutheticationDataSource
-        .signIUpWithEmailAndPassword(userPasswordModel);
+        .loginWithEmailPassword(userPasswordModel: userPasswordModel);
 
     return User.fromModel(userModel);
   }
@@ -71,9 +72,10 @@ class AuthenticationRepositoryImpl extends AuthenticationRepository {
   }
 
   @override
-  Future<void> signOut() {
+  Future<void> signOut()async {
     // TODO: implement signOut
-    throw UnimplementedError();
+      await _localAuthenticationDataSource.clearSession();
+
   }
 
   @override
