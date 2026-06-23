@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:session_3/core/assets.dart';
+import 'package:session_3/core/navigation/router.dart';
 import 'package:session_3/features/login_old/presentation/state/login_provider.dart';
 import 'package:session_3/features/login_old/presentation/widgets/social_widget.dart';
 import 'package:session_3/l10n/app_localizations.dart';
@@ -276,7 +277,7 @@ class HeaderWidget extends StatelessWidget {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (logged) {
         // Navegar a otra pantalla
-        context.go('/dashboard');
+        context.goNamed(Routes.sales);
       }
     });
 

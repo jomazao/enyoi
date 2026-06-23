@@ -15,7 +15,7 @@ class FirebaseRemoteAuthenticationDataSource extends RemoteAuthenticationDataSou
   Future<UserModel> loginWithEmailPassword({required UserPasswordModel userPasswordModel})async {
 
     print('haciendo login a firebase con: email:${userPasswordModel.email} password:${userPasswordModel.password}');
-       final credentials = await _auth.createUserWithEmailAndPassword(
+       final credentials = await _auth.signInWithEmailAndPassword(
       email: userPasswordModel.email,
       password: userPasswordModel.password,
     );

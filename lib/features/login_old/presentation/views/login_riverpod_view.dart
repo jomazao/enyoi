@@ -225,7 +225,7 @@ class HeaderWidget extends ConsumerWidget {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (logged) {
         // Navegar a otra pantalla
-        context.go('/dashboard');
+        context.goNamed(Routes.sales);
       }
     });
 
