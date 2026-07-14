@@ -10,8 +10,7 @@ class SalesFirebaseDataSource {
   Stream<List<SaleModel>> getSalesModelsStream() {
     return _firestore
         .collection('sales')
-        .where('isDeleted',)
-     
+   
         .snapshots()
         .map(
           (snapshot) =>

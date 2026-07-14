@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:session_3/app_colors.dart';
 import 'package:session_3/core/assets.dart';
 import 'package:session_3/core/text_styles.dart';
+import 'package:session_3/features/profile/domain/use_cases/update_profile_picture_use_case.dart';
 
 import 'package:session_3/features/profile/presentation/widgets/menu_option_widget.dart';
 
@@ -52,7 +53,12 @@ class _HeaderSection extends StatelessWidget {
                     color: AppColors.blue,
                     shape: BoxShape.circle,
                   ),
-                  child: Icon(Icons.edit, size: 10, color: Colors.white),
+                  child: InkWell(
+                    onTap: () {
+                      UpdateProfilePictureUseCase().call();
+                    },
+                    child: Icon(Icons.edit, size: 10, color: Colors.white),
+                  ),
                 ),
               ),
             ],
