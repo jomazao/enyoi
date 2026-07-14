@@ -11,7 +11,6 @@ import 'package:session_3/core/local_storage.dart';
 import 'package:session_3/core/navigation/router.dart';
 import 'package:session_3/core/utils/my_bloc_observer.dart';
 import 'package:session_3/features/login_old/presentation/state/login_provider.dart';
-import 'package:session_3/firebase_options.dart';
 import 'package:session_3/l10n/app_localizations.dart';
 
 void runProject() async {
@@ -19,7 +18,7 @@ void runProject() async {
   await Env.initialize();
   await LocalStorage().init();
   await setupDependencies();
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  await Firebase.initializeApp(options: Env.firebaseOptions);
   Bloc.observer = MyBlocObserver();
   runApp(ProviderScope(child: const MainApp()));
 }

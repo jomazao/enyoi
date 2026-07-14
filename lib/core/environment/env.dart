@@ -1,5 +1,8 @@
 import 'dart:convert';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
+import 'package:session_3/firebase_options.dart';
+import 'package:session_3/firebase_options_prod.dart';
 
 enum Environment { development, staging, production }
 
@@ -22,6 +25,14 @@ class Env {
       );
     }
     return _values['appName'] ?? '';
+  }
+
+  static FirebaseOptions get firebaseOptions {
+    if (environment == Environment.production) {
+      return FirebaseOptionsProd.currentPlatform;
+    } else {
+      return DefaultFirebaseOptions.currentPlatform;
+    }
   }
 
   //final String apiBaseUrl;
