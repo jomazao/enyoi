@@ -44,37 +44,38 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyCkZbx3w1XO8bdg1V8o9q6lmEwyOlND2a0',
-    appId: '1:1071537908093:web:788498cee4fca8a18e8414',
-    messagingSenderId: '1071537908093',
-    projectId: 'ecomerce-2e9fc',
-    authDomain: 'ecomerce-2e9fc.firebaseapp.com',
-    storageBucket: 'ecomerce-2e9fc.firebasestorage.app',
+    apiKey: 'AIzaSyCi7bExWwtAiVykB9CVakQ6cPRinCWModw',
+    appId: '1:560321518411:web:2f131b60b788330acd66ce',
+    messagingSenderId: '560321518411',
+    projectId: 'ecommerce-enyoi',
+    authDomain: 'ecommerce-enyoi.firebaseapp.com',
+    storageBucket: 'ecommerce-enyoi.firebasestorage.app',
+    measurementId: 'G-C4RHNF71BP',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyAFgDd62XItEdohlOcqFhtT7XvVqCiwejw',
-    appId: '1:1071537908093:android:06cacd8d8db4fa128e8414',
-    messagingSenderId: '1071537908093',
-    projectId: 'ecomerce-2e9fc',
-    storageBucket: 'ecomerce-2e9fc.firebasestorage.app',
+    apiKey: 'AIzaSyCKisDx2aMokQuWLLg3PYcC_B6E0Y1tbEQ',
+    appId: '1:560321518411:android:2c5ec1b3f20d452ecd66ce',
+    messagingSenderId: '560321518411',
+    projectId: 'ecommerce-enyoi',
+    storageBucket: 'ecommerce-enyoi.firebasestorage.app',
   );
-
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyDsk8zVmPDU5ompEYbiGmZs72mkGPEZKEk',
-    appId: '1:1071537908093:ios:ee06c2601fc82b968e8414',
-    messagingSenderId: '1071537908093',
-    projectId: 'ecomerce-2e9fc',
-    storageBucket: 'ecomerce-2e9fc.firebasestorage.app',
+    apiKey: 'AIzaSyAnTa8IqJWFl5-oy4uKixyAhJ_Hej_zNyY',
+    appId: '1:560321518411:ios:ac6245121f0072fccd66ce',
+    messagingSenderId: '560321518411',
+    projectId: 'ecommerce-enyoi',
+    storageBucket: 'ecommerce-enyoi.firebasestorage.app',
     iosBundleId: 'com.example.session3',
   );
 
   static const FirebaseOptions windows = FirebaseOptions(
-    apiKey: 'AIzaSyCkZbx3w1XO8bdg1V8o9q6lmEwyOlND2a0',
-    appId: '1:1071537908093:web:6b4443985014fab68e8414',
-    messagingSenderId: '1071537908093',
-    projectId: 'ecomerce-2e9fc',
-    authDomain: 'ecomerce-2e9fc.firebaseapp.com',
-    storageBucket: 'ecomerce-2e9fc.firebasestorage.app',
+    apiKey: 'AIzaSyCi7bExWwtAiVykB9CVakQ6cPRinCWModw',
+    appId: '1:560321518411:web:75fefdfcbee7132dcd66ce',
+    messagingSenderId: '560321518411',
+    projectId: 'ecommerce-enyoi',
+    authDomain: 'ecommerce-enyoi.firebaseapp.com',
+    storageBucket: 'ecommerce-enyoi.firebasestorage.app',
+    measurementId: 'G-KV7MVWG2K2',
   );
 }

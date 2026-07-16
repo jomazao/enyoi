@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "1071537908093",
-    "project_id": "ecomerce-2e9fc",
-    "storage_bucket": "ecomerce-2e9fc.firebasestorage.app"
+    "project_number": "560321518411",
+    "project_id": "ecommerce-enyoi",
+    "storage_bucket": "ecommerce-enyoi.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1071537908093:android:06cacd8d8db4fa128e8414",
+        "mobilesdk_app_id": "1:560321518411:android:2c5ec1b3f20d452ecd66ce",
         "android_client_info": {
           "package_name": "com.example.session_3"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyAFgDd62XItEdohlOcqFhtT7XvVqCiwejw"
+          "current_key": "AIzaSyCKisDx2aMokQuWLLg3PYcC_B6E0Y1tbEQ"
         }
       ],
       "services": {

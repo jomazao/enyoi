@@ -46,4 +46,25 @@ class ProfileRemoteDataSource {
       throw e; // Rethrow the error to be handled by the caller
     }
   }
+
+
+  Future<String?> getProfile() async {
+    try {
+      // Retrieve the user's profile data from Firestore
+      final userDocRef = _firestore.collection('users').doc('user_id'); // Replace 'user_id' with the actual user ID
+      final userDocSnapshot = await userDocRef.get();
+
+      if (userDocSnapshot.exists) {
+        final profileData = userDocSnapshot.data();
+        return profileData?['profileImageUrl'] as String?;
+      } else {
+        print('User document does not exist.');
+        return null;
+      }
+    } catch (e) {
+      // Handle any errors that may occur during the retrieval process
+      print('Error retrieving profile data from Firestore: $e');
+      throw e; // Rethrow the error to be handled by the caller
+    }
+  }
 }

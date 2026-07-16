@@ -28,4 +28,9 @@ final ProfileRemoteDataSource _remoteDataSource;
   Future<String> uploadProfileImage(XFile image) {
     return _remoteDataSource.uploadProfileImage(image);
   }
+  
+  @override
+  Future<String?> getProfile() {
+    return _remoteDataSource.getProfile();
+  }
 }

@@ -4,4 +4,5 @@ abstract class ProfileRepository {
   Future<void> updateProfileImage(String imageUrl);
   Future<String> uploadProfileImage(XFile image, );
   Future<XFile?> pickImageFromGallery();
+  Future<String?> getProfile();
 }

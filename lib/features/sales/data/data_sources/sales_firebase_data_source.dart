@@ -10,11 +10,13 @@ class SalesFirebaseDataSource {
   Stream<List<SaleModel>> getSalesModelsStream() {
     return _firestore
         .collection('sales')
-   
+        .where('userId', isEqualTo: 'user123')
+        .orderBy('timestamp', descending: true)
         .snapshots()
         .map(
-          (snapshot) =>
-              snapshot.docs.map((doc) => SaleModel.fromJson(doc.data())).toList(),
+          (snapshot) => snapshot.docs
+              .map((doc) => SaleModel.fromJson(doc.data()))
+              .toList(),
         );
   }
 }

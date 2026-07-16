@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:session_3/app_colors.dart';
 import 'package:session_3/core/assets.dart';
 import 'package:session_3/core/text_styles.dart';
+import 'package:session_3/features/profile/domain/use_cases/get_profile_use_case.dart';
 import 'package:session_3/features/profile/domain/use_cases/update_profile_picture_use_case.dart';
 
 import 'package:session_3/features/profile/presentation/widgets/menu_option_widget.dart';
@@ -31,8 +32,25 @@ class ProfileView extends ConsumerWidget {
   }
 }
 
-class _HeaderSection extends StatelessWidget {
+class _HeaderSection extends StatefulWidget {
   const _HeaderSection({super.key});
+
+  @override
+  State<_HeaderSection> createState() => _HeaderSectionState();
+}
+
+class _HeaderSectionState extends State<_HeaderSection> {
+  String? profileImageUrl;
+
+  @override
+  initState() {
+    super.initState();
+    GetProfileUseCase().call().then((url) {
+      setState(() {
+        profileImageUrl = url;
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +60,9 @@ class _HeaderSection extends StatelessWidget {
         children: [
           Stack(
             children: [
-              Image.asset(Assets.avatarIcon, width: 80, height: 80),
+              profileImageUrl != null
+                  ? Image.network(profileImageUrl!, width: 80, height: 80)
+                  : Image.asset(Assets.avatarIcon, width: 80, height: 80),
               Positioned(
                 bottom: 0,
                 right: 0,
@@ -54,8 +74,14 @@ class _HeaderSection extends StatelessWidget {
                     shape: BoxShape.circle,
                   ),
                   child: InkWell(
-                    onTap: () {
-                      UpdateProfilePictureUseCase().call();
+                    onTap: () async {
+                      final newImageUrl = await UpdateProfilePictureUseCase()
+                          .call();
+                      if (newImageUrl != null) {
+                        setState(() {
+                          profileImageUrl = newImageUrl;
+                        });
+                      }
                     },
                     child: Icon(Icons.edit, size: 10, color: Colors.white),
                   ),

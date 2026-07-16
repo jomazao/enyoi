@@ -6,20 +6,20 @@ class UpdateProfilePictureUseCase {
   UpdateProfilePictureUseCase({ProfileRepository? profileRepository})
     : _profileRepository = profileRepository ?? ProfileRepositoryImpl();
 
-
-  Future<void> call() async {
+  Future<String?> call() async {
     /// Pick an image from the gallery. - Almacenamiento local del dispositivo
     final image = await _profileRepository.pickImageFromGallery();
     if (image != null) {
       /// Subir la imagen seleccionada a Firebase Storage y obtener la URL
       final imageUrl = await _profileRepository.uploadProfileImage(image);
+
       /// Actualizar la URL de la imagen de perfil en FIRESTORE
       await _profileRepository.updateProfileImage(imageUrl);
-    }
-    else {
+      return imageUrl;
+    } else {
       print('No image selected.');
+
+      return null;
     }
   }
-
-
 }
