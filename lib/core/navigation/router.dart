@@ -16,6 +16,7 @@ import 'package:session_3/features/login_old/presentation/views/login_riverpod_v
 import 'package:session_3/features/login_old/presentation/views/login_view.dart';
 import 'package:session_3/features/login_old/presentation/views/register_view.dart';
 import 'package:session_3/features/profile/presentation/views/profile_view.dart';
+import 'package:session_3/features/sales/presentation/views/sales_dashboard_no_stream_view.dart';
 import 'package:session_3/features/sales/presentation/views/sales_dashboard_view.dart';
 
 final router = GoRouter(
@@ -25,11 +26,7 @@ final router = GoRouter(
       path: '/provider',
       builder: (context, state) => LoginView(),
     ),
-        GoRoute(
-      name: Routes.sales,
-      path: '/sales',
-      builder: (context, state) => SalesDashboardView(),
-    ),
+
     GoRoute(
       name: Routes.loginCubit,
       path: '/cubit',
@@ -88,12 +85,17 @@ final router = GoRouter(
                     child: CreditRequestView(),
                   ),
             ),
+            GoRoute(
+              name: Routes.salesNoStream,
+              path: '/sales-no-stream',
+              builder: (context, state) => SalesDashboardViewNoStream(),
+            ),
+            GoRoute(
+              name: Routes.profile,
+              path: '/profile',
+              builder: (context, state) => ProfileView(),
+            ),
           ],
-        ),
-        GoRoute(
-          name: Routes.profile,
-          path: '/profile',
-          builder: (context, state) => ProfileView(),
         ),
       ],
     ),
@@ -109,5 +111,6 @@ abstract class Routes {
   static const String dashboard = 'dashboard';
   static const String creditRequest = 'solicitud-credito';
   static const String profile = 'profile';
-  static const String sales = 'sales';
+  static const String salesNoStream = 'sales-no-stream';
+  static const String sales = 'sales-no-stream';
 }

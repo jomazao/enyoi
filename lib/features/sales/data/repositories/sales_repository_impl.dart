@@ -11,6 +11,15 @@ class SalesRepositoryImpl extends SalesRepository {
 
   @override
   Stream<List<Sale>> getSalesStream() {
-    return _dataSource.getSalesModelsStream().map((list)=> list.toEntityList());
+    return _dataSource.getSalesModelsStream().map(
+      (list) => list.toEntityList(),
+    );
+  }
+
+  @override
+  Future<List<Sale>> getSales({double? lastTotal}) {
+    return _dataSource
+        .getSalesModels(lastTotal: lastTotal)
+        .then((list) => list.toEntityList());
   }
 }

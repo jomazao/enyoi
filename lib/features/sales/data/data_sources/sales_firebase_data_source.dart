@@ -10,13 +10,22 @@ class SalesFirebaseDataSource {
   Stream<List<SaleModel>> getSalesModelsStream() {
     return _firestore
         .collection('sales')
-        .where('userId', isEqualTo: 'user123')
-        .orderBy('timestamp', descending: true)
+        .orderBy('total', descending: false)
         .snapshots()
         .map(
           (snapshot) => snapshot.docs
               .map((doc) => SaleModel.fromJson(doc.data()))
               .toList(),
         );
+  }
+
+  Future<List<SaleModel>> getSalesModels({double? lastTotal}) async {
+    final docs = await _firestore
+        .collection('sales')
+        .orderBy('total', descending: false)
+        .startAfter([lastTotal])
+        .limit(2)
+        .get();
+    return docs.docs.map((doc) => SaleModel.fromJson(doc.data())).toList();
   }
 }

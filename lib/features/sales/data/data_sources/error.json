@@ -1,0 +1,23 @@
+{
+  "errors": [
+    {
+      "title": "Inconsistencies in the document.",
+      "path": [
+        "createPersonPayroll"
+      ],
+      "message": "Employer not found",
+      "locations": [
+        {
+          "line": 44,
+          "column": 3
+        }
+      ],
+      "language": "en-US",
+      "id": "100-PC01",
+      "help_text": "The Employer might not be registered. Contact us at support@yabi.co"
+    }
+  ],
+  "data": {
+    "createPersonPayroll": null
+  }
+}

@@ -22,7 +22,7 @@ class DashboardView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final buttonsText = ['Crédito', 'Perfil', 'Cerrar sesión'];
+    final buttonsText = ['Crédito', 'Ventas', 'Perfil', 'Cerrar sesión'];
 
     final buttons = buttonsText
         .map(
@@ -35,10 +35,12 @@ class DashboardView extends StatelessWidget {
                 case 'Perfil':
                   context.goNamed(Routes.profile);
                   break;
+                case 'Ventas':
+                  context.goNamed(Routes.sales);
+                  break;
                 case 'Cerrar sesión':
-             
-                LogOutUseCase().call();
-                   context.goNamed(Routes.login);
+                  LogOutUseCase().call();
+                  context.goNamed(Routes.login);
                   // Implementar lógica de cierre de sesión
                   break;
               }

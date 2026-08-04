@@ -13,11 +13,17 @@ class SalesDashboardView extends ConsumerWidget {
     final Widget child = state.when(
       initial: () => SizedBox.shrink(),
       loading: (sales) => CircularProgressIndicator(),
-      loaded: (sales) =>
-          Column(children: sales.map((sale) => Text('${sale.total}')).toList()),
+      loaded: (sales) => ListView(
+        children: sales
+            .map((sale) => Center(child: Text('${sale.total}')))
+            .toList(),
+      ),
       error: (message) => Text(message),
     );
 
-    return Scaffold(appBar: AppBar(), body: Center(child: child));
+    return Scaffold(
+      appBar: AppBar(),
+      body: Center(child: child),
+    );
   }
 }
