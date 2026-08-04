@@ -21,12 +21,14 @@ class SalesDashboardNoStreamNotifier
   final GetSalesUseCase _getSalesUseCase;
 
   Future<void> loadSales({double? lastTotal}) async {
-    final List<Sale> previousSales = state.when(
-      initial: () => [],
-      loading: (sales) => [],
-      loaded: (sales) => sales,
-      error: (message) => [],
-    );
+    final List<Sale> previousSales = lastTotal == null
+        ? []
+        : state.when(
+            initial: () => [],
+            loading: (sales) => [],
+            loaded: (sales) => sales,
+            error: (message) => [],
+          );
     state = SalesDashboardState.loading(sales: previousSales);
 
     try {
