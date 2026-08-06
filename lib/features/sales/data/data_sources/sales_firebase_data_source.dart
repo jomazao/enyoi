@@ -19,7 +19,7 @@ class SalesFirebaseDataSource {
         );
   }
 
-  Future<List<SaleModel>> getSalesModels({double? lastTotal}) async {
+  Future<List<SaleModel>> getSalesModels({ double? lastTotal}) async {
     final docs = await _firestore
         .collection('sales')
         .orderBy('total', descending: false)
