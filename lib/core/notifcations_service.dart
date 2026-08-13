@@ -1,5 +1,33 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:session_3/core/environment/env.dart';
+import 'package:session_3/core/log_data_source.dart';
+import 'package:session_3/core/navigation/router.dart';
+
+@pragma('vm:entry-point')
+Future<void> _firebaseBackgroundHandler(RemoteMessage message) async {
+  try {
+    Env.environment = Environment.development;
+  } catch (e) {
+    print('already set: $e');
+  }
+
+  await Env.initialize();
+  await Firebase.initializeApp(options: Env.firebaseOptions);
+
+  // Trabajo corto y sin UI: cachear, contar, loguear
+  final data = message.data;
+  // await _guardarEnCacheLocal(data);
+  print('Background message received: ${message.notification?.title}');
+  print('Background message data: $data');
+
+  LogDataSource logDataSource = LogDataSource();
+  await logDataSource.logEvent('background_message', {
+    ...data,
+    'title': message.notification?.title ?? '',
+  });
+}
 
 class NotificationsService {
   NotificationsService({
@@ -12,10 +40,14 @@ class NotificationsService {
   final FirebaseMessaging _firebaseMessaging;
   final FlutterLocalNotificationsPlugin _localNotifications;
 
+  RemoteMessage? _initialMessage;
+
   Future<void> init() async {
     await _requestPermissions();
     await _initRemoteNotifications();
     await _initLocalNotifications();
+    _initBackgroundHandler();
+    _initMessageOpenedApp();
   }
 
   Future<void> _requestPermissions() async {
@@ -99,5 +131,36 @@ class NotificationsService {
       body: message.notification?.body ?? 'Esta es una notificación local',
       notificationDetails: details,
     );
+  }
+
+  void _initBackgroundHandler() {
+    FirebaseMessaging.onBackgroundMessage(_firebaseBackgroundHandler);
+  }
+
+  void _initMessageOpenedApp() {
+    FirebaseMessaging.onMessageOpenedApp.listen((message) {
+      print('Notification opened: ${message.notification?.title}');
+
+      // Handle the notification tap here
+
+      final title = message.notification?.title ?? '';
+      final data = message.data;
+
+      switch (title) {
+        case 'Profile':
+          router.goNamed(Routes.profile);
+          break;
+        case 'Sales':
+          router.goNamed(Routes.sales, extra: data);
+          break;
+        default:
+          router.goNamed(Routes.dashboard);
+      }
+    });
+  }
+
+  Future<RemoteMessage?> getInitialMessage() async {
+    _initialMessage = await _firebaseMessaging.getInitialMessage();
+    return _initialMessage;
   }
 }

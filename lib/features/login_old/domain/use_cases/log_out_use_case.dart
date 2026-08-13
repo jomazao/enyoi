@@ -10,9 +10,7 @@ class LogOutUseCase {
 
   Future<void> call() async {
     // Lógica adicional antes de cerrar sesión, si es necesario
-     await _authenticationRepository.logOut(
-    
-    ); // S
+    await _authenticationRepository.logOut(); // S
     return _authenticationRepository.signOut();
   }
 }

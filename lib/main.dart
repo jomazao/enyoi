@@ -31,6 +31,29 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      final initialMessage = await NotificationsService().getInitialMessage();
+      if (initialMessage != null) {
+        // Handle the initial message when the app is opened from a terminated state
+        print(
+          'App opened from terminated state with message: ${initialMessage.data}',
+        );
+        // You can navigate to a specific screen based on the message data here
+      }
+      final title = initialMessage?.notification?.title ?? '';
+
+      switch (title) {
+        case 'Profile':
+          router.goNamed(Routes.profile);
+          break;
+        case 'Sales':
+          router.goNamed(Routes.sales);
+          break;
+        default:
+        //router.goNamed(Routes.dashboard);
+      }
+    });
+
     return ChangeNotifierProvider(
       create: (_) => LoginProvider()..checkIfLogged(),
       child: MaterialApp.router(

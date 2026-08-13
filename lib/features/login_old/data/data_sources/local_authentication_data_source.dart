@@ -17,6 +17,7 @@ class LocalAuthenticationDataSource {
   }
 
   Future<void> clearSession() async {
+    await _prefs.clear();
     await _prefs.remove(Consts.sessionTokenKey);
   }
 }
