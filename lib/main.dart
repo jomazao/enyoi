@@ -42,8 +42,11 @@ class MainApp extends StatelessWidget {
       }
       final title = initialMessage?.notification?.title ?? '';
 
+      initialMessage?.data.forEach((key, value) {
+        print('Key: $key, Value: $value');
+      });
       switch (title) {
-        case 'Profile':
+        case 'sales_detail':
           router.goNamed(Routes.profile);
           break;
         case 'Sales':
